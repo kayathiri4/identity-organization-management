@@ -41,7 +41,6 @@ import org.wso2.carbon.identity.organization.management.application.util.OrgAppl
 import org.wso2.carbon.identity.organization.management.ext.Constants;
 import org.wso2.carbon.identity.organization.management.service.OrganizationManager;
 import org.wso2.carbon.identity.organization.management.service.exception.OrganizationManagementException;
-import org.wso2.carbon.identity.organization.management.service.model.BasicOrganization;
 import org.wso2.carbon.identity.organization.management.service.model.Organization;
 import org.wso2.carbon.identity.organization.management.service.util.OrganizationManagementUtil;
 
@@ -201,11 +200,11 @@ public class OrganizationCreationHandler extends AbstractEventHandler {
             PrivilegedCarbonContext.startTenantFlow();
             PrivilegedCarbonContext.getThreadLocalCarbonContext().setTenantDomain(rootTenantDomain, true);
             for (String mainAppId : mainAppIds) {
-                List<String> childOrgIds = getOrganizationManager()
-                        .getChildOrganizationsIds(rootOrganizationId);
+                boolean hasChildOrganization = getOrganizationManager()
+                        .hasChildOrganization(rootOrganizationId);
                 // Since the application doesn't have any child organizations, isAppShared service provider property
                 // should be set to false.
-                if (CollectionUtils.isEmpty(childOrgIds)) {
+                if (!hasChildOrganization) {
                     ServiceProvider mainApplication = getApplicationManagementService()
                             .getApplicationByResourceId(mainAppId, rootTenantDomain);
                     updateApplicationWithIsAppSharedProperty(false, mainApplication);

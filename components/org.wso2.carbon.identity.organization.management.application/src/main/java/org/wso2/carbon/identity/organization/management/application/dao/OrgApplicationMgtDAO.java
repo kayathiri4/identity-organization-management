@@ -21,6 +21,7 @@ package org.wso2.carbon.identity.organization.management.application.dao;
 import org.wso2.carbon.identity.organization.management.application.model.MainApplicationDO;
 import org.wso2.carbon.identity.organization.management.application.model.SharedApplicationDO;
 import org.wso2.carbon.identity.organization.management.service.exception.OrganizationManagementException;
+import org.wso2.carbon.identity.organization.management.service.exception.OrganizationManagementServerException;
 
 import java.util.List;
 import java.util.Optional;
@@ -118,4 +119,6 @@ public interface OrgApplicationMgtDAO {
      */
     void updateShareWithAllChildren(String mainApplicationId, String ownerOrganizationId, boolean shareWithAllChildren)
             throws OrganizationManagementException;
+
+    void deleteSharedAppLink(String organizationId) throws OrganizationManagementServerException;
 }

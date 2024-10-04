@@ -673,6 +673,12 @@ public class OrgApplicationManagerImpl implements OrgApplicationManager {
         }
     }
 
+    @Override
+    public boolean hasFragmentApps(String mainApplicationId) throws OrganizationManagementException {
+
+        return getOrgApplicationMgtDAO().hasFragments(mainApplicationId);
+    }
+
     private boolean isOAuthClientExistsError(IdentityException e) {
 
         return DUPLICATE_OAUTH_CLIENT.getErrorCode().equals(e.getErrorCode());

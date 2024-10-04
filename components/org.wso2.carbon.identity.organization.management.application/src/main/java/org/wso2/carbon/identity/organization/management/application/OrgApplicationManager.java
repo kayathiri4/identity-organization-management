@@ -144,4 +144,6 @@ public interface OrgApplicationManager {
      */
     void shareApplication(String ownerOrgId, String sharedOrgId, ServiceProvider mainApplication,
             boolean shareWithAllChildren) throws OrganizationManagementException;
+
+    boolean hasFragmentApps(String mainApplicationId) throws OrganizationManagementException;
 }
